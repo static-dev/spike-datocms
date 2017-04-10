@@ -1,5 +1,7 @@
 # Spike DatoCMS Plugin
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/static-dev/spike-datocms.svg)](https://greenkeeper.io/)
+
 [![npm](https://img.shields.io/npm/v/spike-datocms.svg?style=flat-square)](https://npmjs.com/package/spike-datocms)
 [![tests](https://img.shields.io/travis/static-dev/spike-datocms.svg?style=flat-square)](https://travis-ci.org/static-dev/spike-datocms?branch=master)
 [![dependencies](https://img.shields.io/david/static-dev/spike-datocms.svg?style=flat-square)](https://david-dm.org/static-dev/spike-datocms)
