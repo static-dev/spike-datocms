@@ -1,0 +1,36 @@
+{
+  "name": "spike-datocms",
+  "description": "quick and easy interface to datocms content",
+  "version": "0.0.0",
+  "author": "Jeff Escalante",
+  "ava": {
+    "verbose": "true"
+  },
+  "bugs": "https://github.com/static-dev/spike-datocms/issues",
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "coveralls": "^2.13.0",
+    "nyc": "^10.2.0",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.1"
+  },
+  "engines": {
+    "node": ">= 6"
+  },
+  "homepage": "https://github.com/static-dev/spike-datocms",
+  "license": "MIT",
+  "main": "lib",
+  "repository": "static-dev/spike-datocms",
+  "scripts": {
+    "test": "nyc ava",
+    "lint": "standard | snazzy",
+    "coverage": "nyc ava && nyc report --reporter=html && open ./coverage/index.html",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "dependencies": {
+    "datocms-client": "^0.3.21",
+    "joi": "^10.4.1",
+    "spike-util": "^1.1.0",
+    "when": "^3.7.8"
+  }
+}
