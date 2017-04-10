@@ -9,7 +9,7 @@
   "bugs": "https://github.com/static-dev/spike-datocms/issues",
   "devDependencies": {
     "ava": "^0.19.1",
-    "coveralls": "^2.13.0",
+    "codecov": "^2.1.0",
     "nyc": "^10.2.0",
     "snazzy": "^7.0.0",
     "standard": "^10.0.1"
@@ -25,7 +25,7 @@
     "test": "nyc ava",
     "lint": "standard | snazzy",
     "coverage": "nyc ava && nyc report --reporter=html && open ./coverage/index.html",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc report -r lcovonly && codecov"
   },
   "dependencies": {
     "datocms-client": "^0.3.21",
