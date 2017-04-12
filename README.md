@@ -61,6 +61,14 @@ ul
     li post.title
 ```
 
+### Single Template Render
+
+todo
+
+### JSON Output
+
+todo
+
 ### License & Contributing
 
 - Details on the license [can be found here](LICENSE.md)
