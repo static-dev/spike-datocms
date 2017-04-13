@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/spike-datocms.svg?style=flat-square)](https://npmjs.com/package/spike-datocms)
 [![tests](https://img.shields.io/travis/static-dev/spike-datocms.svg?style=flat-square)](https://travis-ci.org/static-dev/spike-datocms?branch=master)
 [![dependencies](https://img.shields.io/david/static-dev/spike-datocms.svg?style=flat-square)](https://david-dm.org/static-dev/spike-datocms)
-[![coverage](https://img.shields.io/coveralls/static-dev/spike-datocms.svg?style=flat-square)](https://coveralls.io/r/static-dev/spike-datocms?branch=master)
+[![coverage](https://img.shields.io/codecov/c/github/static-dev/spike-datocms.svg?style=flat-square)](https://codecov.io/gh/static-dev/spike-datocms)
 
 A quick and easy interface to DatoCMS content
 
