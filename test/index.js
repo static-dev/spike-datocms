@@ -82,3 +82,34 @@ test.cb('generates single page templates correctly', (t) => {
 
   project.compile()
 })
+
+test.cb('writes json', (t) => {
+  const locals = {}
+  const projPath = path.join(fixturesPath, 'basic')
+  const project = new Spike({
+    root: projPath,
+    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    ignore: ['template.html'],
+    plugins: [new SpikeDatoCMS({
+      token: datoToken,
+      addDataTo: locals,
+      json: 'all.json',
+      models: [{
+        name: 'article',
+        json: 'articles.json'
+      }]
+    })]
+  })
+
+  project.on('error', t.end)
+  project.on('compile', () => {
+    const all = JSON.parse(fs.readFileSync(path.join(projPath, 'public/all.json'), 'utf8'))
+    const articles = JSON.parse(fs.readFileSync(path.join(projPath, 'public/articles.json'), 'utf8'))
+    t.truthy(all.article.length > 0)
+    t.truthy(articles.length > 0)
+    rimraf.sync(path.join(projPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
