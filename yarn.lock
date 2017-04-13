@@ -5053,6 +5053,13 @@ reshape-layouts@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/reshape-layouts/-/reshape-layouts-1.0.0.tgz#d6eff8a35a54ea9380a829e32525c9c4b9fb2a59"
 
+reshape-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/reshape-loader/-/reshape-loader-1.0.0.tgz#c5bf46ad99715b216f87a1b772c4bc2695121cd6"
+  dependencies:
+    reshape "^0.4.1"
+    reshape-include "^1.0.0"
+
 reshape-loader@next:
   version "0.5.0-2"
   resolved "https://registry.yarnpkg.com/reshape-loader/-/reshape-loader-0.5.0-2.tgz#a70fdf3697615c0c7be79912c34e137b2abf22af"
