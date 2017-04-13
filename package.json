@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "author": "Jeff Escalante",
   "ava": {
-    "verbose": "true"
+    "verbose": "true",
+    "serial": "true"
   },
   "bugs": "https://github.com/static-dev/spike-datocms/issues",
   "devDependencies": {
