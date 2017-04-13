@@ -13,10 +13,10 @@ test.cb('basic', (t) => {
   const plugin = new SpikeDatoCMS({
     token: datoToken,
     addDataTo: locals,
-    models: [{ name: 'post' }]
+    models: [{ name: 'article' }]
   })
   return plugin.run({}, () => {
-    t.truthy(locals.dato.post.length > 0)
+    t.truthy(locals.dato.article.length > 0)
     t.end()
   })
 })
@@ -32,14 +32,14 @@ test.cb('works with spike', (t) => {
     plugins: [new SpikeDatoCMS({
       token: datoToken,
       addDataTo: locals,
-      models: [{ name: 'post' }]
+      models: [{ name: 'article' }]
     })]
   })
 
   project.on('error', t.end)
   project.on('compile', () => {
     const output = JSON.parse(fs.readFileSync(path.join(projPath, 'public/index.html'), 'utf8'))
-    t.truthy(output.post.length > 0)
+    t.truthy(output.article.length > 0)
     t.end()
   })
 
