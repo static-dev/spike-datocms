@@ -27,7 +27,7 @@ module.exports = {
   plugins: [
     new SpikeDatoCMS({
       addDataTo: locals,
-      apiToken: 'xxx',
+      token: 'xxx',
       models: [{
         type: 'post', // if you leave this off, it will pull all posts
         ids: [10, 13], // (optional) only return specific records
