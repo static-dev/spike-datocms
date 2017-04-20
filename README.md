@@ -61,13 +61,78 @@ ul
     li post.title
 ```
 
+This plugin will also automatically pull the meta information for the site, including the site title, SEO fields, etc. that you control via the "Settings" menu, and assign it as `dato._meta`. This makes it super easy to reflect CMS-controlled SEO fields in your layouts.
+
 ### Single Template Render
 
-todo
+Using the template option allows you to write records returned from Dato to single page templates. For example, if you are trying to render a blog as static, you might want each post returned from the API to be rendered as a single page by itself.
+
+The `template` option is an object with `path` and `output` keys. The `path` is an absolute or relative path to a template to be used to render each item, and output is a function with the currently iterated item as a parameter, which should return a string representing a path relative to the project root where the single view should be rendered. For example:
+
+```js
+new SpikeDatoCMS({
+  addDataTo: locals,
+  accessToken: 'xxx',
+  spaceId: 'xxx',
+  models: [{
+    name: 'posts',
+    template: {
+      path: 'templates/post.html',
+      output: (post) => { return `posts/${post.slug}.html` }
+    }
+  }]
+})
+```
+
+Your template must use the `item` variable as seen below.
+
+> **Note:** you also will need to prevent Spike from attempting to render your template file normally by adding your templates to Spike's `ignore` option, or adding an underscore to the file name.
+
+```html
+<p>{{ item.title }}</p>
+```
 
 ### JSON Output
 
-todo
+Finally, if you'd like to have the output written locally to a JSON file so that it's cached locally, you can pass the name of the file, resolved relative to your project's output, as a `json` option to the plugin. For example:
+
+```js
+new Contentful({
+  addDataTo: locals,
+  accessToken: 'xxx',
+  spaceId: 'xxx'
+  contentTypes: [{
+    name: 'posts',
+    id: '633fTeiMaxxxxxxxxx'
+  }],
+  json: 'data.json'
+})
+```
+
+You may also choose to have the ouput written specifically for any content type :
+
+```js
+new Contentful({
+  addDataTo: locals,
+  accessToken: 'xxx',
+  spaceId: 'xxx'
+  contentTypes: [
+    {
+      name: 'posts',
+      id: '633fTeiMaxxxxxxxxx',
+      // JSON output expected for this content type
+      json: 'posts.json'
+    },
+    {
+      name: 'press',
+      id: '4Em9bQeIQxxxxxxxxx'
+      // No JSON output needed for this content type
+    }
+  ],
+  // Save all content types data in one file
+  json: 'alldata.json'
+})
+```
 
 ### License & Contributing
 

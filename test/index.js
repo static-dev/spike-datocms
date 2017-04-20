@@ -9,7 +9,7 @@ const rimraf = require('rimraf')
 const fixturesPath = path.join(__dirname, 'fixtures')
 const datoToken = 'cb1f960dfb4f14a7ae93'
 
-test.cb('basic', (t) => {
+test.only.cb('basic', (t) => {
   const locals = {}
   const plugin = new SpikeDatoCMS({
     token: datoToken,
@@ -17,6 +17,7 @@ test.cb('basic', (t) => {
     models: [{ name: 'article' }]
   })
   return plugin.run({}, () => {
+    t.truthy(locals.dato._meta.id)
     t.truthy(locals.dato.article.length > 0)
     t.end()
   })
