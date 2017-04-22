@@ -72,8 +72,7 @@ The `template` option is an object with `path` and `output` keys. The `path` is 
 ```js
 new SpikeDatoCMS({
   addDataTo: locals,
-  accessToken: 'xxx',
-  spaceId: 'xxx',
+  token: 'xxx',
   models: [{
     name: 'posts',
     template: {
@@ -97,30 +96,23 @@ Your template must use the `item` variable as seen below.
 Finally, if you'd like to have the output written locally to a JSON file so that it's cached locally, you can pass the name of the file, resolved relative to your project's output, as a `json` option to the plugin. For example:
 
 ```js
-new Contentful({
+new SpikeDatoCMS({
   addDataTo: locals,
-  accessToken: 'xxx',
-  spaceId: 'xxx'
-  contentTypes: [{
-    name: 'posts',
-    id: '633fTeiMaxxxxxxxxx'
-  }],
+  token: 'xxx',
+  models: [{ name: 'posts' }],
   json: 'data.json'
 })
 ```
 
-You may also choose to have the ouput written specifically for any content type :
+You may also choose to have the output written specifically for any content type:
 
 ```js
-new Contentful({
+new SpikeDatoCMS({
   addDataTo: locals,
-  accessToken: 'xxx',
-  spaceId: 'xxx'
-  contentTypes: [
-    {
-      name: 'posts',
-      id: '633fTeiMaxxxxxxxxx',
-      // JSON output expected for this content type
+  token: 'xxx',
+  models: [
+    { name: 'posts',
+
       json: 'posts.json'
     },
     {
