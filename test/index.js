@@ -115,7 +115,7 @@ test.cb('writes json', (t) => {
   project.compile()
 })
 
-test.only.cb('writes cache', (t) => {
+test.cb('writes cache', (t) => {
   const locals = {}
   const projPath = path.join(fixturesPath, 'writeCache')
   const project = new Spike({
