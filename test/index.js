@@ -9,7 +9,7 @@ const rimraf = require('rimraf')
 const fixturesPath = path.join(__dirname, 'fixtures')
 const datoToken = 'cb1f960dfb4f14a7ae93'
 
-test.only.cb('basic', (t) => {
+test.cb('basic', (t) => {
   const locals = {}
   const plugin = new SpikeDatoCMS({
     token: datoToken,
@@ -49,7 +49,7 @@ test.cb('works with spike', (t) => {
   project.compile()
 })
 
-test.todo('generates josn correctly')
+test.todo('generates json correctly')
 
 test.cb('generates single page templates correctly', (t) => {
   const locals = {}
@@ -109,6 +109,65 @@ test.cb('writes json', (t) => {
     t.truthy(all.article.length > 0)
     t.truthy(articles.length > 0)
     rimraf.sync(path.join(projPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
+
+test.only.cb('writes cache', (t) => {
+  const locals = {}
+  const projPath = path.join(fixturesPath, 'writeCache')
+  const project = new Spike({
+    root: projPath,
+    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    ignore: ['template.html'],
+    plugins: [new SpikeDatoCMS({
+      token: datoToken,
+      addDataTo: locals,
+      cache: 'cache/dato.json',
+      models: [{
+        name: 'article'
+      }]
+    })]
+  })
+
+  project.on('error', t.end)
+  project.on('compile', () => {
+    const all = JSON.parse(fs.readFileSync(path.join(projPath, 'cache/dato.json'), 'utf8'))
+    t.truthy(all.article.length > 0)
+    rimraf.sync(path.join(projPath, 'public'))
+    rimraf.sync(path.join(projPath, 'cache'))
+    t.end()
+  })
+
+  project.compile()
+})
+
+test.cb('reads cache', (t) => {
+  const locals = {}
+  const projPath = path.join(fixturesPath, 'readCache')
+  const project = new Spike({
+    root: projPath,
+    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    ignore: ['template.html'],
+    plugins: [new SpikeDatoCMS({
+      token: datoToken,
+      addDataTo: locals,
+      cache: 'cache/dato.json',
+      models: [{
+        name: 'article'
+      }]
+    })]
+  })
+
+  project.on('error', t.end)
+  project.on('compile', () => {
+    const p = path.join(projPath, 'cache/dato.json')
+    const all = JSON.parse(fs.readFileSync(p, 'utf8'))
+    t.truthy(all.article.length > 0)
+    rimraf.sync(path.join(projPath, 'public'))
+    rimraf.sync(path.join(projPath, 'cache'))
     t.end()
   })
 

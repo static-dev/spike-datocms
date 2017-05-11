@@ -35,6 +35,7 @@
     "datocms-client": "^0.3.21",
     "es6bindall": "^0.0.9",
     "joi": "^10.4.1",
+    "mkdirp": "^0.5.1",
     "reshape": "^0.4.1",
     "reshape-loader": "^1.0.0",
     "spike-util": "^1.1.0",
