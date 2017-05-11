@@ -167,7 +167,6 @@ test.cb('reads cache', (t) => {
     const all = JSON.parse(fs.readFileSync(p, 'utf8'))
     t.truthy(all.article.length > 0)
     rimraf.sync(path.join(projPath, 'public'))
-    rimraf.sync(path.join(projPath, 'cache'))
     t.end()
   })
 
