@@ -1,0 +1,95 @@
+{
+  "article": [
+    {
+      "id": "48624",
+      "updatedAt": "2017-04-13T18:54:25.346Z",
+      "isValid": true,
+      "image": {
+        "alt": null,
+        "path": "/1598/1492109658-absurd-png",
+        "size": 476633,
+        "title": null,
+        "width": 1228,
+        "format": "png",
+        "height": 764
+      },
+      "slug": "testing-2-post",
+      "body": "What a great post this is",
+      "title": "Testing #2 Post",
+      "itemType": "6793",
+      "lastEditor": "1347"
+    },
+    {
+      "id": "42067",
+      "updatedAt": "2017-04-13T18:53:48.664Z",
+      "isValid": true,
+      "image": {
+        "alt": null,
+        "path": "/1598/1489204301-logo-text-png",
+        "size": 10781,
+        "title": null,
+        "width": 636,
+        "format": "png",
+        "height": 212
+      },
+      "slug": "testing-post",
+      "body": "Wow, what a great post this is!",
+      "title": "Testing Post",
+      "itemType": "6793",
+      "lastEditor": "1347"
+    }
+  ],
+  "_meta": {
+    "id": "1598",
+    "name": "Test",
+    "locales": [
+      "en"
+    ],
+    "themeHue": 200,
+    "domain": null,
+    "internalDomain": "test-72.admin.datocms.com",
+    "globalSeo": {
+      "siteName": "Testing",
+      "titleSuffix": null,
+      "twitterAccount": "@jescalan",
+      "facebookPageUrl": "https://facebook.com/carrot",
+      "fallbackSeo": {
+        "title": "Testing",
+        "description": "Nulla vitae elit libero, a pharetra augue. Maecenas sed diam eget risus varius blandit sit amet non magna.",
+        "image": {
+          "path": "/1598/1492702970-2-jpg",
+          "width": 2560,
+          "height": 1440,
+          "format": "jpg",
+          "size": 779218,
+          "alt": null,
+          "title": null
+        }
+      }
+    },
+    "favicon": null,
+    "noIndex": false,
+    "frontendUrl": null,
+    "ssg": "other",
+    "account": "1347",
+    "users": [],
+    "menuItems": [
+      "8645",
+      "8644",
+      "8643",
+      "8642",
+      "8641",
+      "8047",
+      "7322"
+    ],
+    "itemTypes": [
+      "6793",
+      "8166",
+      "8163",
+      "8164",
+      "8165",
+      "7491",
+      "8162"
+    ]
+  }
+}

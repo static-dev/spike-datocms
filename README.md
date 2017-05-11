@@ -126,6 +126,27 @@ new SpikeDatoCMS({
 })
 ```
 
+### Local Cache
+
+> :rotating_light: Please understand this section thoroughly before attempting to use the `cache` feature
+
+During local development, each time you run a fresh compile this plugin will pull fresh data from the DatoCMS API. In some instances of local development where having live data is not 100% necessary and you can trade the additional network requests for a faster compile.
+
+To solve for this, we've implemented a `cache` option. By setting a path for a path to write a cached version of the API response, this plugin will read from that local file as opposed to going to the live API to get fresh data.
+
+**To invalidate the cache, simply delete the file in your `cache` path and on your next compile a new cache file will be written**
+
+```js
+new SpikeDatoCMS({
+  addDataTo: locals,
+  token: 'xxx',
+  models: [{ name: 'posts' }],
+  cache: '_data.json'
+})
+```
+
+
+
 ### License & Contributing
 
 - Details on the license [can be found here](LICENSE.md)
