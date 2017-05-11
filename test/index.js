@@ -115,35 +115,6 @@ test.cb('writes json', (t) => {
   project.compile()
 })
 
-test.cb('writes cache', (t) => {
-  const locals = {}
-  const projPath = path.join(fixturesPath, 'writeCache')
-  const project = new Spike({
-    root: projPath,
-    reshape: htmlStandards({ parser: false, locals: () => locals }),
-    ignore: ['template.html'],
-    plugins: [new SpikeDatoCMS({
-      token: datoToken,
-      addDataTo: locals,
-      cache: 'cache/dato.json',
-      models: [{
-        name: 'article'
-      }]
-    })]
-  })
-
-  project.on('error', t.end)
-  project.on('compile', () => {
-    const all = JSON.parse(fs.readFileSync(path.join(projPath, 'cache/dato.json'), 'utf8'))
-    t.truthy(all.article.length > 0)
-    rimraf.sync(path.join(projPath, 'public'))
-    rimraf.sync(path.join(projPath, 'cache'))
-    t.end()
-  })
-
-  project.compile()
-})
-
 test.cb('reads cache', (t) => {
   const locals = {}
   const projPath = path.join(fixturesPath, 'readCache')
@@ -167,6 +138,35 @@ test.cb('reads cache', (t) => {
     const all = JSON.parse(fs.readFileSync(p, 'utf8'))
     t.truthy(all.article.length > 0)
     rimraf.sync(path.join(projPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
+
+test.cb('writes cache', (t) => {
+  const locals = {}
+  const projPath = path.join(fixturesPath, 'writeCache')
+  const project = new Spike({
+    root: projPath,
+    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    ignore: ['template.html'],
+    plugins: [new SpikeDatoCMS({
+      token: datoToken,
+      addDataTo: locals,
+      cache: 'cache/dato.json',
+      models: [{
+        name: 'article'
+      }]
+    })]
+  })
+
+  project.on('error', t.end)
+  project.on('compile', () => {
+    const all = JSON.parse(fs.readFileSync(path.join(projPath, 'cache/dato.json'), 'utf8'))
+    t.truthy(all.article.length > 0)
+    rimraf.sync(path.join(projPath, 'public'))
+    rimraf.sync(path.join(projPath, 'cache'))
     t.end()
   })
 
