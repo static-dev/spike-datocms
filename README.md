@@ -29,7 +29,7 @@ module.exports = {
       addDataTo: locals,
       token: 'xxx',
       models: [{
-        type: 'post', // if you leave this off, it will pull all posts
+        type: 'post', // if you leave this off, it will pull content from all models
         ids: [10, 13], // (optional) only return specific records
         query: 'foo', // (optional) text query for records
         offset: 3, // (optional) offset results
