@@ -19,6 +19,8 @@ test.cb('basic', (t) => {
   return plugin.run({}, () => {
     t.truthy(locals.dato._meta.id)
     t.truthy(locals.dato.article.length > 0)
+    t.truthy(locals.dato.article.length < 3)
+    t.truthy(locals.dato.article[0].category.id)
     t.end()
   })
 })
