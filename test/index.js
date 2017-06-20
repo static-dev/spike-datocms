@@ -21,6 +21,7 @@ test.cb('basic', (t) => {
     t.truthy(locals.dato.article.length > 0)
     t.truthy(locals.dato.article.length < 3)
     t.truthy(locals.dato.article[0].category.id)
+    t.truthy(locals.dato.article[0].categories[0].id)
     t.end()
   })
 })
