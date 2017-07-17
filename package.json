@@ -8,6 +8,16 @@
     "serial": "true"
   },
   "bugs": "https://github.com/static-dev/spike-datocms/issues",
+  "dependencies": {
+    "datocms-client": "^0.3.25",
+    "es6bindall": "^0.0.9",
+    "joi": "^10.6.0",
+    "mkdirp": "^0.5.1",
+    "reshape": "^0.4.1",
+    "reshape-loader": "^1.0.0",
+    "spike-util": "^1.2.0",
+    "when": "^3.7.8"
+  },
   "devDependencies": {
     "ava": "^0.20.0",
     "codecov": "^2.2.0",
@@ -22,23 +32,16 @@
     "node": ">= 6"
   },
   "homepage": "https://github.com/static-dev/spike-datocms",
+  "keywords": [
+    "spikeplugin"
+  ],
   "license": "MIT",
   "main": "lib",
   "repository": "static-dev/spike-datocms",
   "scripts": {
-    "test": "nyc ava",
-    "lint": "standard | snazzy",
+    "codecov": "nyc report -r lcovonly && codecov",
     "coverage": "nyc ava && nyc report --reporter=html && open ./coverage/index.html",
-    "codecov": "nyc report -r lcovonly && codecov"
-  },
-  "dependencies": {
-    "datocms-client": "^0.3.25",
-    "es6bindall": "^0.0.9",
-    "joi": "^10.6.0",
-    "mkdirp": "^0.5.1",
-    "reshape": "^0.4.1",
-    "reshape-loader": "^1.0.0",
-    "spike-util": "^1.2.0",
-    "when": "^3.7.8"
+    "lint": "standard | snazzy",
+    "test": "nyc ava"
   }
 }
