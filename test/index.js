@@ -60,7 +60,6 @@ test.cb('generates single page templates correctly', (t) => {
   const project = new Spike({
     root: projPath,
     reshape: htmlStandards({ parser: false, locals: () => locals }),
-    ignore: ['template.html'],
     plugins: [new SpikeDatoCMS({
       token: datoToken,
       addDataTo: locals,
@@ -80,6 +79,60 @@ test.cb('generates single page templates correctly', (t) => {
     const file2 = JSON.parse(fs.readFileSync(path.join(projPath, 'public/articles/testing-2-post.html'), 'utf8'))
     t.is(file1.title, 'Testing Post')
     t.is(file2.title, 'Testing #2 Post')
+    rimraf.sync(path.join(projPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
+
+test.cb('errors when there is no template.path', (t) => {
+  const locals = {}
+  const projPath = path.join(fixturesPath, 'template')
+  const project = new Spike({
+    root: projPath,
+    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    plugins: [new SpikeDatoCMS({
+      token: datoToken,
+      addDataTo: locals,
+      models: [{
+        name: 'article',
+        template: {
+          output: (obj) => `articles/${obj.slug}.html`
+        }
+      }]
+    })]
+  })
+
+  project.on('error', (err) => {
+    t.regex(err.toString(), /article\.template must have a "path" property/)
+    rimraf.sync(path.join(projPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
+
+test.cb('errors when there is no template.output', (t) => {
+  const locals = {}
+  const projPath = path.join(fixturesPath, 'template')
+  const project = new Spike({
+    root: projPath,
+    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    plugins: [new SpikeDatoCMS({
+      token: datoToken,
+      addDataTo: locals,
+      models: [{
+        name: 'article',
+        template: {
+          path: 'template.html'
+        }
+      }]
+    })]
+  })
+
+  project.on('error', (err) => {
+    t.regex(err.toString(), /article\.template must have an "output" function/)
     rimraf.sync(path.join(projPath, 'public'))
     t.end()
   })
@@ -112,64 +165,6 @@ test.cb('writes json', (t) => {
     t.truthy(all.article.length > 0)
     t.truthy(articles.length > 0)
     rimraf.sync(path.join(projPath, 'public'))
-    t.end()
-  })
-
-  project.compile()
-})
-
-test.cb('reads cache', (t) => {
-  const locals = {}
-  const projPath = path.join(fixturesPath, 'readCache')
-  const project = new Spike({
-    root: projPath,
-    reshape: htmlStandards({ parser: false, locals: () => locals }),
-    ignore: ['template.html'],
-    plugins: [new SpikeDatoCMS({
-      token: datoToken,
-      addDataTo: locals,
-      cache: 'cache/dato.json',
-      models: [{
-        name: 'article'
-      }]
-    })]
-  })
-
-  project.on('error', t.end)
-  project.on('compile', () => {
-    const p = path.join(projPath, 'cache/dato.json')
-    const all = JSON.parse(fs.readFileSync(p, 'utf8'))
-    t.truthy(all.article.length > 0)
-    rimraf.sync(path.join(projPath, 'public'))
-    t.end()
-  })
-
-  project.compile()
-})
-
-test.cb('writes cache', (t) => {
-  const locals = {}
-  const projPath = path.join(fixturesPath, 'writeCache')
-  const project = new Spike({
-    root: projPath,
-    reshape: htmlStandards({ parser: false, locals: () => locals }),
-    ignore: ['template.html'],
-    plugins: [new SpikeDatoCMS({
-      token: datoToken,
-      addDataTo: locals,
-      cache: 'cache/dato.json',
-      models: [{
-        name: 'article'
-      }]
-    })]
-  })
-
-  project.on('error', t.end)
-  project.on('compile', () => {
-    const all = JSON.parse(fs.readFileSync(path.join(projPath, 'cache/dato.json'), 'utf8'))
-    t.truthy(all.article.length > 0)
-    rimraf.sync(path.join(projPath, 'public'))
-    rimraf.sync(path.join(projPath, 'cache'))
     t.end()
   })
 

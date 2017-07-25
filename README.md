@@ -130,27 +130,6 @@ new SpikeDatoCMS({
 
 By default, this plugin will only fetch data once when you start your watcher, for development speed purposes. This means that if you change your data, you will have to restart the watcher to pick up the changes. If you are in a phase where you are making frequent data changes and would like a more aggressive updating strategy, you can set the `aggressiveRefresh` option to `true`, and your dreams will come true. However, note that this will slow down your local development, as it will fetch and link all entires every time you save a file, so it's only recommended for temporary use.
 
-### Local Cache
-
-> :rotating_light: Please understand this section thoroughly before attempting to use the `cache` feature
-
-During local development, each time you run a fresh compile this plugin will pull fresh data from the DatoCMS API. In some instances of local development where having live data is not 100% necessary and you can trade the additional network requests for a faster compile.
-
-To solve for this, we've implemented a `cache` option. By setting a path for a path to write a cached version of the API response, this plugin will read from that local file as opposed to going to the live API to get fresh data.
-
-**To invalidate the cache, simply delete the file in your `cache` path and on your next compile a new cache file will be written**
-
-```js
-new SpikeDatoCMS({
-  addDataTo: locals,
-  token: 'xxx',
-  models: [{ name: 'posts' }],
-  cache: '_data.json'
-})
-```
-
-
-
 ### License & Contributing
 
 - Details on the license [can be found here](LICENSE.md)
