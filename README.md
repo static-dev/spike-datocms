@@ -126,6 +126,10 @@ new SpikeDatoCMS({
 })
 ```
 
+### Aggressive Refresh
+
+By default, this plugin will only fetch data once when you start your watcher, for development speed purposes. This means that if you change your data, you will have to restart the watcher to pick up the changes. If you are in a phase where you are making frequent data changes and would like a more aggressive updating strategy, you can set the `aggressiveRefresh` option to `true`, and your dreams will come true. However, note that this will slow down your local development, as it will fetch and link all entires every time you save a file, so it's only recommended for temporary use.
+
 ### Local Cache
 
 > :rotating_light: Please understand this section thoroughly before attempting to use the `cache` feature
