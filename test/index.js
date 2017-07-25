@@ -86,6 +86,60 @@ test.cb('generates single page templates correctly', (t) => {
   project.compile()
 })
 
+test.cb('errors when there is no template.path', (t) => {
+  const locals = {}
+  const projPath = path.join(fixturesPath, 'template')
+  const project = new Spike({
+    root: projPath,
+    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    plugins: [new SpikeDatoCMS({
+      token: datoToken,
+      addDataTo: locals,
+      models: [{
+        name: 'article',
+        template: {
+          output: (obj) => `articles/${obj.slug}.html`
+        }
+      }]
+    })]
+  })
+
+  project.on('error', (err) => {
+    t.regex(err.toString(), /article\.template must have a "path" property/)
+    rimraf.sync(path.join(projPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
+
+test.cb('errors when there is no template.output', (t) => {
+  const locals = {}
+  const projPath = path.join(fixturesPath, 'template')
+  const project = new Spike({
+    root: projPath,
+    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    plugins: [new SpikeDatoCMS({
+      token: datoToken,
+      addDataTo: locals,
+      models: [{
+        name: 'article',
+        template: {
+          path: 'template.html'
+        }
+      }]
+    })]
+  })
+
+  project.on('error', (err) => {
+    t.regex(err.toString(), /article\.template must have an "output" function/)
+    rimraf.sync(path.join(projPath, 'public'))
+    t.end()
+  })
+
+  project.compile()
+})
+
 test.cb('writes json', (t) => {
   const locals = {}
   const projPath = path.join(fixturesPath, 'basic')
