@@ -5916,9 +5916,9 @@ speakingurl@10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/speakingurl/-/speakingurl-10.0.0.tgz#24ef980de85194d17f2daea30a6b2c2cc51115bb"
 
-spike-core@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/spike-core/-/spike-core-2.1.0.tgz#b6b6e2df932f23b5594f09c8796cfee1f6f4951f"
+spike-core@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/spike-core/-/spike-core-2.1.1.tgz#fd72df1f316ddcd122afe6a6276f710bbe09c561"
   dependencies:
     babel-core "^6.25.0"
     babel-loader "^7.1.1"
