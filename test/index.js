@@ -26,6 +26,19 @@ test.cb('basic', (t) => {
   })
 })
 
+test.cb('sorts models by position', (t) => {
+  const locals = {}
+  const plugin = new SpikeDatoCMS({
+    token: datoToken,
+    addDataTo: locals,
+    models: [{ name: 'product' }]
+  })
+  return plugin.run({}, () => {
+    t.truthy(locals.dato.product === locals.dato.product.sort((a, b) => a.position - b.position))
+    t.end()
+  })
+})
+
 test.cb('works with spike', (t) => {
   const locals = {}
   const projPath = path.join(fixturesPath, 'basic')
