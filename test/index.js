@@ -49,7 +49,7 @@ test.cb('works with spike', t => {
     root: projPath,
     // so if the locals are not passed as a function, the reference doesn't
     // update. i'm not 100% sure why this is, in theory it should
-    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    reshape: htmlStandards({ parser: false, locals: () => locals, retext: [] }),
     plugins: [
       new SpikeDatoCMS({
         token: datoToken,
@@ -75,11 +75,11 @@ test.cb('works with spike', t => {
 test.todo('generates json correctly')
 
 test.cb('generates single page templates correctly', t => {
-  const locals = {}
+  const locals = { foo: 'bar' }
   const projPath = path.join(fixturesPath, 'template')
   const project = new Spike({
     root: projPath,
-    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    reshape: htmlStandards({ parser: false, locals: () => locals, retext: [] }),
     plugins: [
       new SpikeDatoCMS({
         token: datoToken,
@@ -99,20 +99,22 @@ test.cb('generates single page templates correctly', t => {
 
   project.on('error', t.end)
   project.on('compile', () => {
-    const file1 = JSON.parse(
-      fs.readFileSync(
-        path.join(projPath, 'public/articles/testing-post.html'),
-        'utf8'
-      )
+    const file1 = fs.readFileSync(
+      path.join(projPath, 'public/articles/testing-post.html'),
+      'utf8'
     )
-    const file2 = JSON.parse(
-      fs.readFileSync(
-        path.join(projPath, 'public/articles/testing-2-post.html'),
-        'utf8'
-      )
+    const file2 = fs.readFileSync(
+      path.join(projPath, 'public/articles/testing-2-post.html'),
+      'utf8'
     )
-    t.is(file1.title, 'Testing Post')
-    t.is(file2.title, 'Testing #2 Post')
+
+    t.is(file1.match(/<global>(.*)<\/global>/)[1], 'bar')
+    t.is(JSON.parse(file1.match(/<item>(.*)<\/item>/)[1]).title, 'Testing Post')
+    t.is(file2.match(/<global>(.*)<\/global>/)[1], 'bar')
+    t.is(
+      JSON.parse(file2.match(/<item>(.*)<\/item>/)[1]).title,
+      'Testing #2 Post'
+    )
     rimraf.sync(path.join(projPath, 'public'))
     t.end()
   })
@@ -125,7 +127,7 @@ test.cb('errors when there is no template.path', t => {
   const projPath = path.join(fixturesPath, 'template')
   const project = new Spike({
     root: projPath,
-    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    reshape: htmlStandards({ parser: false, locals: () => locals, retext: [] }),
     plugins: [
       new SpikeDatoCMS({
         token: datoToken,
@@ -156,7 +158,7 @@ test.cb('errors when there is no template.output', t => {
   const projPath = path.join(fixturesPath, 'template')
   const project = new Spike({
     root: projPath,
-    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    reshape: htmlStandards({ parser: false, locals: () => locals, retext: [] }),
     plugins: [
       new SpikeDatoCMS({
         token: datoToken,
@@ -187,7 +189,7 @@ test.cb('writes json', t => {
   const projPath = path.join(fixturesPath, 'basic')
   const project = new Spike({
     root: projPath,
-    reshape: htmlStandards({ parser: false, locals: () => locals }),
+    reshape: htmlStandards({ parser: false, locals: () => locals, retext: [] }),
     ignore: ['template.html'],
     plugins: [
       new SpikeDatoCMS({
