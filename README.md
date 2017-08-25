@@ -85,7 +85,7 @@ new SpikeDatoCMS({
 
 Your template must use the `item` variable as seen below.
 
-> **Note:** you also will need to prevent Spike from attempting to render your template file normally by adding your templates to Spike's `ignore` option, or adding an underscore to the file name.
+> **Note:** Make sure your template is *not ignored* by spike, or this functionality will not work
 
 ```html
 <p>{{ item.title }}</p>
