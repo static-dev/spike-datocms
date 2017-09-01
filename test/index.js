@@ -54,6 +54,7 @@ test.cb('works with spike', t => {
       new SpikeDatoCMS({
         token: datoToken,
         addDataTo: locals,
+        aggressiveRefresh: true,
         models: [{ name: 'article' }]
       })
     ]
@@ -73,6 +74,7 @@ test.cb('works with spike', t => {
 })
 
 test.todo('generates json correctly')
+test.todo('agressively refreshes data')
 
 test.cb('generates single page templates correctly', t => {
   const locals = { foo: 'bar' }
