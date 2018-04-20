@@ -28,20 +28,23 @@ module.exports = {
     new SpikeDatoCMS({
       addDataTo: locals,
       token: 'xxx',
-      models: [{
-        type: 'post', // if you leave this off, it will pull content from all models
-        ids: [10, 13], // (optional) only return specific records
-        query: 'foo', // (optional) text query for records
-        offset: 3, // (optional) offset results
-        limit: 10, // (optional) limit number of results returned
-        transform: (record) => {
-          // each record is passed through this function, if provided
-          // change it however you want and return the modified result!
-          return record
+      models: [
+        {
+          type: 'post', // if you leave this off, it will pull content from all models
+          ids: [10, 13], // (optional) only return specific records
+          query: 'foo', // (optional) text query for records
+          offset: 3, // (optional) offset results
+          limit: 10, // (optional) limit number of results returned
+          transform: record => {
+            // each record is passed through this function, if provided
+            // change it however you want and return the modified result!
+            return record
+          }
+        },
+        {
+          type: 'author'
         }
-      }, {
-        type: 'author'
-      }]
+      ]
     })
   ]
 }
@@ -73,19 +76,23 @@ The `template` option is an object with `path` and `output` keys. The `path` is 
 new SpikeDatoCMS({
   addDataTo: locals,
   token: 'xxx',
-  models: [{
-    name: 'posts',
-    template: {
-      path: 'templates/post.html',
-      output: (post) => { return `posts/${post.slug}.html` }
+  models: [
+    {
+      name: 'posts',
+      template: {
+        path: 'templates/post.html',
+        output: post => {
+          return `posts/${post.slug}.html`
+        }
+      }
     }
-  }]
+  ]
 })
 ```
 
 Your template must use the `item` variable as seen below.
 
-> **Note:** Make sure your template is *not ignored* by spike, or this functionality will not work
+> **Note:** Make sure your template is _not ignored_ by spike, or this functionality will not work
 
 ```html
 <p>{{ item.title }}</p>
@@ -111,7 +118,8 @@ new SpikeDatoCMS({
   addDataTo: locals,
   token: 'xxx',
   models: [
-    { name: 'posts',
+    {
+      name: 'posts',
 
       json: 'posts.json'
     },
@@ -130,7 +138,11 @@ new SpikeDatoCMS({
 
 By default, this plugin will only fetch data once when you start your watcher, for development speed purposes. This means that if you change your data, you will have to restart the watcher to pick up the changes. If you are in a phase where you are making frequent data changes and would like a more aggressive updating strategy, you can set the `aggressiveRefresh` option to `true`, and your dreams will come true. However, note that this will slow down your local development, as it will fetch and link all entires every time you save a file, so it's only recommended for temporary use.
 
+### Drafts
+
+Passing `drafts: true` as an option to the plugin will make dato return the latest version of each post, rather than the published version. This is recommended in staging or development.
+
 ### License & Contributing
 
-- Details on the license [can be found here](LICENSE.md)
-- Details on running tests and contributing [can be found here](contributing.md)
+* Details on the license [can be found here](LICENSE.md)
+* Details on running tests and contributing [can be found here](contributing.md)

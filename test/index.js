@@ -20,8 +20,9 @@ test.cb('basic', t => {
     t.truthy(locals.dato._meta.id)
     t.truthy(locals.dato.article.length > 0)
     t.truthy(locals.dato.article.length < 3)
-    t.truthy(locals.dato.article[0].category.id)
-    t.truthy(locals.dato.article[0].categories[0].id)
+    const testPost = locals.dato.article.find(a => a.slug === 'testing-post')
+    t.truthy(testPost.category.id)
+    t.truthy(testPost.categories[0].id)
     t.end()
   })
 })
@@ -224,3 +225,5 @@ test.cb('writes json', t => {
 
   project.compile()
 })
+
+test.todo('pulls draft posts')
