@@ -1714,9 +1714,9 @@ date-time@^2.1.0:
   dependencies:
     time-zone "^1.0.0"
 
-datocms-client@^0.4.6:
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/datocms-client/-/datocms-client-0.4.6.tgz#9e7bfa2f9181d4afeb4970e38393880dc52b1ccc"
+datocms-client@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/datocms-client/-/datocms-client-0.5.2.tgz#d99699faa0c7e89577fcacc39a7f996a714e3d06"
   dependencies:
     babel-polyfill "6.16.0"
     chokidar "^1.6.1"
